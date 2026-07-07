@@ -8,8 +8,11 @@ namespace HouseholdExpenseManager.Api.Controllers;
 [Route("api/summary")]
 public class SummaryController(ISummaryService summaryService) : ControllerBase
 {
-    // Returns the financial summary grouped by person and the general totals.
+    /// <summary>
+    /// Returns financial totals grouped by person and the general household balance.
+    /// </summary>
     [HttpGet]
+    [ProducesResponseType(typeof(SummaryResponse), StatusCodes.Status200OK)]
     public async Task<ActionResult<SummaryResponse>> GetSummaryAsync()
     {
         var summary = await summaryService.GetSummaryAsync();
