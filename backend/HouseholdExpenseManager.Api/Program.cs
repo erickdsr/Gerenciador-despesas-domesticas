@@ -1,4 +1,5 @@
 using HouseholdExpenseManager.Api.Data.Context;
+using HouseholdExpenseManager.Api.Middlewares;
 using HouseholdExpenseManager.Api.Repositories;
 using HouseholdExpenseManager.Api.Repositories.Interfaces;
 using HouseholdExpenseManager.Api.Services;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<ISummaryService, SummaryService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.MapControllers();
 
