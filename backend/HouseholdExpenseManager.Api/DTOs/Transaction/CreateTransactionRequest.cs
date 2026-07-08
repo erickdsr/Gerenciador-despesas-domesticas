@@ -8,7 +8,7 @@ public class CreateTransactionRequest
     [Required]
     public string Description { get; set; } = string.Empty;
 
-    [Range(typeof(decimal), "0.01", "79228162514264337593543950335")]
+    [Range(0.01, double.MaxValue)]
     public decimal Amount { get; set; }
 
     public TransactionType Type { get; set; }

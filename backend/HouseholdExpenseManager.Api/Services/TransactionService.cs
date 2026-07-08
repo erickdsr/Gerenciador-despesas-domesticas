@@ -18,6 +18,18 @@ public class TransactionService(
         return transactions.Select(MapToResponse).ToList();
     }
 
+    public async Task<TransactionResponse> GetByIdAsync(int id)
+    {
+        var transaction = await transactionRepository.GetByIdAsync(id);
+
+        if (transaction is null)
+        {
+            throw new NotFoundException("Transaction not found.");
+        }
+
+        return MapToResponse(transaction);
+    }
+
     public async Task<TransactionResponse> CreateAsync(CreateTransactionRequest request)
     {
         var person = await personRepository.GetByIdAsync(request.PersonId);

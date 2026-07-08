@@ -15,6 +15,13 @@ public class TransactionRepository(AppDbContext context) : ITransactionRepositor
             .ToListAsync();
     }
 
+    public async Task<FinancialTransaction?> GetByIdAsync(int id)
+    {
+        return await context.Transactions
+            .Include(transaction => transaction.Person)
+            .FirstOrDefaultAsync(transaction => transaction.Id == id);
+    }
+
     public async Task<FinancialTransaction> CreateAsync(FinancialTransaction transaction)
     {
         context.Transactions.Add(transaction);

@@ -6,6 +6,8 @@ public interface IPersonService
 {
     Task<List<PersonResponse>> GetAllAsync();
 
+    Task<PersonResponse> GetByIdAsync(int id);
+
     Task<PersonResponse> CreateAsync(CreatePersonRequest request);
 
     Task DeleteAsync(int id);

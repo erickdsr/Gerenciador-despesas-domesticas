@@ -22,6 +22,19 @@ public class PeopleController(IPersonService personService) : ControllerBase
     }
 
     /// <summary>
+    /// Returns a person by id.
+    /// </summary>
+    [HttpGet("{id:int}", Name = nameof(GetPersonByIdAsync))]
+    [ProducesResponseType(typeof(PersonResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PersonResponse>> GetPersonByIdAsync(int id)
+    {
+        var person = await personService.GetByIdAsync(id);
+
+        return Ok(person);
+    }
+
+    /// <summary>
     /// Creates a person with name and age.
     /// </summary>
     [HttpPost]
@@ -31,7 +44,7 @@ public class PeopleController(IPersonService personService) : ControllerBase
     {
         var person = await personService.CreateAsync(request);
 
-        return CreatedAtAction(nameof(GetAllAsync), new { id = person.Id }, person);
+        return CreatedAtRoute(nameof(GetPersonByIdAsync), new { id = person.Id }, person);
     }
 
     /// <summary>

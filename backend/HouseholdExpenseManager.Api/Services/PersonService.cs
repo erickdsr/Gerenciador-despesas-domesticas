@@ -15,6 +15,18 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         return people.Select(MapToResponse).ToList();
     }
 
+    public async Task<PersonResponse> GetByIdAsync(int id)
+    {
+        var person = await personRepository.GetByIdAsync(id);
+
+        if (person is null)
+        {
+            throw new NotFoundException("Person not found.");
+        }
+
+        return MapToResponse(person);
+    }
+
     public async Task<PersonResponse> CreateAsync(CreatePersonRequest request)
     {
         // Creates a person from the request data and persists it through the repository.

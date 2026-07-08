@@ -22,6 +22,19 @@ public class TransactionsController(ITransactionService transactionService) : Co
     }
 
     /// <summary>
+    /// Returns a transaction by id including the person's name.
+    /// </summary>
+    [HttpGet("{id:int}", Name = nameof(GetTransactionByIdAsync))]
+    [ProducesResponseType(typeof(TransactionResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<TransactionResponse>> GetTransactionByIdAsync(int id)
+    {
+        var transaction = await transactionService.GetByIdAsync(id);
+
+        return Ok(transaction);
+    }
+
+    /// <summary>
     /// Creates a transaction for an existing person.
     /// </summary>
     [HttpPost]
@@ -32,6 +45,6 @@ public class TransactionsController(ITransactionService transactionService) : Co
     {
         var transaction = await transactionService.CreateAsync(request);
 
-        return CreatedAtAction(nameof(GetAllAsync), new { id = transaction.Id }, transaction);
+        return CreatedAtRoute(nameof(GetTransactionByIdAsync), new { id = transaction.Id }, transaction);
     }
 }

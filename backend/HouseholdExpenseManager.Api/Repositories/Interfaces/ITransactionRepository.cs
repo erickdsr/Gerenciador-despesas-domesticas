@@ -6,6 +6,8 @@ public interface ITransactionRepository
 {
     Task<List<FinancialTransaction>> GetAllAsync();
 
+    Task<FinancialTransaction?> GetByIdAsync(int id);
+
     Task<FinancialTransaction> CreateAsync(FinancialTransaction transaction);
 
     Task<List<FinancialTransaction>> GetByPersonIdAsync(int personId);
