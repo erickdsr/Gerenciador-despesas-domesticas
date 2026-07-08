@@ -8,11 +8,16 @@ using HouseholdExpenseManager.Api.Services.Interfaces;
 
 namespace HouseholdExpenseManager.Api.Services;
 
-// Aplica validacoes e regras de negocio especificas de transacoes antes da persistencia.
+/// <summary>
+/// Aplica validacoes e regras de negocio especificas de transacoes antes da persistencia.
+/// </summary>
 public class TransactionService(
     ITransactionRepository transactionRepository,
     IPersonRepository personRepository) : ITransactionService
 {
+    /// <summary>
+    /// Busca todas as transacoes e converte entidades para DTOs de resposta.
+    /// </summary>
     public async Task<List<TransactionResponse>> GetAllAsync()
     {
         var transactions = await transactionRepository.GetAllAsync();
@@ -20,6 +25,9 @@ public class TransactionService(
         return transactions.Select(MapToResponse).ToList();
     }
 
+    /// <summary>
+    /// Busca uma transacao pelo id e dispara erro padronizado quando nao existir.
+    /// </summary>
     public async Task<TransactionResponse> GetByIdAsync(int id)
     {
         var transaction = await transactionRepository.GetByIdAsync(id);
@@ -32,6 +40,9 @@ public class TransactionService(
         return MapToResponse(transaction);
     }
 
+    /// <summary>
+    /// Valida entrada, existencia da pessoa e regras de idade antes de criar a transacao.
+    /// </summary>
     public async Task<TransactionResponse> CreateAsync(CreateTransactionRequest request)
     {
         // Normaliza a descricao para que espacos em branco nao sejam salvos como texto valido.
@@ -79,11 +90,17 @@ public class TransactionService(
         return MapToResponse(createdTransaction, person.Name);
     }
 
+    /// <summary>
+    /// Mapeia transacoes que ja vieram com a navegacao Person carregada.
+    /// </summary>
     private static TransactionResponse MapToResponse(FinancialTransaction transaction)
     {
         return MapToResponse(transaction, transaction.Person.Name);
     }
 
+    /// <summary>
+    /// Mapeia transacoes quando o nome da pessoa ja foi obtido por outra consulta.
+    /// </summary>
     private static TransactionResponse MapToResponse(FinancialTransaction transaction, string personName)
     {
         return new TransactionResponse

@@ -5,9 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HouseholdExpenseManager.Api.Repositories;
 
-// Centraliza consultas de transacoes e carrega Person quando a UI precisa do nome da pessoa.
+/// <summary>
+/// Centraliza consultas de transacoes e carrega Person quando a UI precisa do nome da pessoa.
+/// </summary>
 public class TransactionRepository(AppDbContext context) : ITransactionRepository
 {
+    /// <summary>
+    /// Retorna transacoes recentes primeiro e inclui a pessoa vinculada.
+    /// </summary>
     public async Task<List<FinancialTransaction>> GetAllAsync()
     {
         return await context.Transactions
@@ -16,6 +21,9 @@ public class TransactionRepository(AppDbContext context) : ITransactionRepositor
             .ToListAsync();
     }
 
+    /// <summary>
+    /// Busca uma transacao especifica incluindo a pessoa vinculada.
+    /// </summary>
     public async Task<FinancialTransaction?> GetByIdAsync(int id)
     {
         return await context.Transactions
@@ -23,6 +31,9 @@ public class TransactionRepository(AppDbContext context) : ITransactionRepositor
             .FirstOrDefaultAsync(transaction => transaction.Id == id);
     }
 
+    /// <summary>
+    /// Adiciona uma transacao e salva as mudancas no banco.
+    /// </summary>
     public async Task<FinancialTransaction> CreateAsync(FinancialTransaction transaction)
     {
         context.Transactions.Add(transaction);
@@ -31,6 +42,9 @@ public class TransactionRepository(AppDbContext context) : ITransactionRepositor
         return transaction;
     }
 
+    /// <summary>
+    /// Retorna as transacoes de uma pessoa, usadas no calculo dos resumos.
+    /// </summary>
     public async Task<List<FinancialTransaction>> GetByPersonIdAsync(int personId)
     {
         return await context.Transactions

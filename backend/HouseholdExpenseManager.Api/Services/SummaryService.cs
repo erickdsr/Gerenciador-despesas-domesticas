@@ -5,11 +5,16 @@ using HouseholdExpenseManager.Api.Services.Interfaces;
 
 namespace HouseholdExpenseManager.Api.Services;
 
-// Monta os totais financeiros somente leitura usados pelo dashboard.
+/// <summary>
+/// Monta os totais financeiros somente leitura usados pelo dashboard.
+/// </summary>
 public class SummaryService(
     IPersonRepository personRepository,
     ITransactionRepository transactionRepository) : ISummaryService
 {
+    /// <summary>
+    /// Calcula rendas, despesas e saldos por pessoa, alem do consolidado geral.
+    /// </summary>
     public async Task<SummaryResponse> GetSummaryAsync()
     {
         var people = await personRepository.GetAllAsync();

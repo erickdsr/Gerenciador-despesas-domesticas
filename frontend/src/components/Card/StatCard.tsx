@@ -1,6 +1,7 @@
 import { formatCurrency } from '../../utils/formatters'
 import { Card } from './Card'
 
+// Cartao de indicador financeiro com cor semantica para renda, despesa ou saldo.
 interface StatCardProps {
   label: string
   value: number

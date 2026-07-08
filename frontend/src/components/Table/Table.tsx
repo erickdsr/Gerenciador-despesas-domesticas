@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+// Define como cada coluna obtem e apresenta dados de uma linha generica.
 interface Column<T> {
   key: string
   header: string
@@ -7,6 +8,7 @@ interface Column<T> {
   align?: 'left' | 'right' | 'center'
 }
 
+// Recebe dados ja carregados e deixa cada pagina decidir as colunas exibidas.
 interface TableProps<T> {
   columns: Column<T>[]
   data: T[]

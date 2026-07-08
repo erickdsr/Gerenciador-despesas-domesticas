@@ -1,3 +1,4 @@
+/* Variaveis globais de cor, tipografia e sombra usadas em toda a aplicacao. */
 :root {
   --bg: #f6f7f9;
   --surface: #ffffff;
@@ -30,6 +31,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset minimo para manter medidas previsiveis entre navegadores. */
 * {
   box-sizing: border-box;
 }
@@ -82,6 +84,7 @@ h2 {
   min-height: 100vh;
 }
 
+/* Estrutura principal da aplicacao e navegacao fixa no topo. */
 .app-shell {
   min-height: 100vh;
 }
@@ -138,6 +141,7 @@ h2 {
   padding: 40px 0 56px;
 }
 
+/* Cabecalhos e organizacao geral das paginas internas. */
 .page {
   display: grid;
   gap: 24px;
@@ -159,6 +163,7 @@ h2 {
   text-transform: uppercase;
 }
 
+/* Cards e paineis usados para indicadores, formularios e tabelas. */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -218,6 +223,7 @@ h2 {
   padding: 18px 22px;
 }
 
+/* Formularios responsivos para cadastro de pessoas e transacoes. */
 .form-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 180px auto;
@@ -264,6 +270,7 @@ h2 {
   justify-content: flex-end;
 }
 
+/* Botoes com variantes semanticas para acoes principais e destrutivas. */
 .button {
   min-height: 44px;
   display: inline-flex;
@@ -304,6 +311,7 @@ h2 {
   border-color: var(--danger);
 }
 
+/* Tabelas com rolagem horizontal para preservar leitura em telas pequenas. */
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -356,6 +364,7 @@ h2 {
   text-align: center;
 }
 
+/* Mensagens de estado e alertas exibidos apos chamadas de API. */
 .status-message {
   color: var(--muted);
   padding: 4px 0;
@@ -379,6 +388,7 @@ h2 {
   color: var(--success);
 }
 
+/* Cores auxiliares para valores financeiros e tipos de transacao. */
 .text-income {
   color: var(--income);
   font-weight: 800;
@@ -409,6 +419,7 @@ h2 {
   color: var(--expense);
 }
 
+/* Ajustes para tablets e telas estreitas. */
 @media (max-width: 920px) {
   .stats-grid {
     grid-template-columns: 1fr;
@@ -428,6 +439,7 @@ h2 {
   }
 }
 
+/* Ajustes para celulares, com navegacao e tabelas mais compactas. */
 @media (max-width: 680px) {
   .navbar__inner {
     width: min(100% - 24px, 1180px);

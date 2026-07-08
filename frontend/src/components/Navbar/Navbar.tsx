@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
+// Rotas visiveis na navegacao principal da SPA.
 const links = [
   { to: '/', label: 'Dashboard' },
   { to: '/people', label: 'Pessoas' },

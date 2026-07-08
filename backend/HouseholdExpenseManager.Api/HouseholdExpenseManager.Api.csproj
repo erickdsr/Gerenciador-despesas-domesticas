@@ -3,7 +3,9 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Gera XML docs para que os comentarios do backend aparecam no Swagger. -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Evita avisos para membros simples que nao precisam aparecer individualmente na documentacao publica. -->
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 

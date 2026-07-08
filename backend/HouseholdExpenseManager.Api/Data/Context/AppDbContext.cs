@@ -3,13 +3,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HouseholdExpenseManager.Api.Data.Context;
 
+/// <summary>
+/// Contexto do Entity Framework Core responsavel pelo mapeamento das entidades para o SQLite.
+/// </summary>
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    // As propriedades DbSet definem as tabelas gerenciadas pelo EF Core nesta aplicacao.
+    /// <summary>
+    /// Tabela de pessoas cadastradas.
+    /// </summary>
     public DbSet<Person> People => Set<Person>();
 
+    /// <summary>
+    /// Tabela de transacoes financeiras.
+    /// </summary>
     public DbSet<FinancialTransaction> Transactions => Set<FinancialTransaction>();
 
+    /// <summary>
+    /// Configura nomes de tabelas, relacionamentos e precisao monetaria.
+    /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

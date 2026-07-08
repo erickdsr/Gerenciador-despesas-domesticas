@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+// Container visual reutilizavel para destacar blocos de informacao.
 interface CardProps {
   children: ReactNode
   className?: string

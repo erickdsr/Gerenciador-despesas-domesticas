@@ -1,5 +1,6 @@
 import type { SelectHTMLAttributes } from 'react'
 
+// Campo select com label padronizado para formularios da aplicacao.
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string
 }

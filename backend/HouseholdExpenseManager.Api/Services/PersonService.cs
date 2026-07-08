@@ -7,9 +7,14 @@ using HouseholdExpenseManager.Api.Services.Interfaces;
 
 namespace HouseholdExpenseManager.Api.Services;
 
-// Cuida da validacao e da orquestracao de pessoas antes dos dados chegarem ao repositorio.
+/// <summary>
+/// Cuida da validacao e da orquestracao de pessoas antes dos dados chegarem ao repositorio.
+/// </summary>
 public class PersonService(IPersonRepository personRepository) : IPersonService
 {
+    /// <summary>
+    /// Busca todas as pessoas e converte entidades para DTOs de resposta.
+    /// </summary>
     public async Task<List<PersonResponse>> GetAllAsync()
     {
         var people = await personRepository.GetAllAsync();
@@ -17,6 +22,9 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         return people.Select(MapToResponse).ToList();
     }
 
+    /// <summary>
+    /// Busca uma pessoa pelo id e dispara erro padronizado quando nao existir.
+    /// </summary>
     public async Task<PersonResponse> GetByIdAsync(int id)
     {
         var person = await personRepository.GetByIdAsync(id);
@@ -29,6 +37,9 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         return MapToResponse(person);
     }
 
+    /// <summary>
+    /// Valida os dados de entrada, cria a entidade e retorna o registro criado.
+    /// </summary>
     public async Task<PersonResponse> CreateAsync(CreatePersonRequest request)
     {
         // Normaliza a entrada do usuario antes de validar e salvar.
@@ -55,6 +66,9 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         return MapToResponse(createdPerson);
     }
 
+    /// <summary>
+    /// Remove uma pessoa existente e deixa o EF Core aplicar a exclusao em cascata.
+    /// </summary>
     public async Task DeleteAsync(int id)
     {
         var person = await personRepository.GetByIdAsync(id);
@@ -68,6 +82,9 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         await personRepository.DeleteAsync(person);
     }
 
+    /// <summary>
+    /// Traduz a entidade de banco para o contrato publico da API.
+    /// </summary>
     private static PersonResponse MapToResponse(Person person)
     {
         return new PersonResponse

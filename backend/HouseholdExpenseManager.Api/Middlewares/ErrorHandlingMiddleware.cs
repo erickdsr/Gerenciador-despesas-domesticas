@@ -4,9 +4,14 @@ using HouseholdExpenseManager.Api.Exceptions;
 
 namespace HouseholdExpenseManager.Api.Middlewares;
 
-// Converte excecoes de controllers/services em respostas JSON consistentes da API.
+/// <summary>
+/// Converte excecoes de controllers/services em respostas JSON consistentes da API.
+/// </summary>
 public class ErrorHandlingMiddleware(RequestDelegate next)
 {
+    /// <summary>
+    /// Executa o proximo middleware e intercepta excecoes nao tratadas.
+    /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
         try

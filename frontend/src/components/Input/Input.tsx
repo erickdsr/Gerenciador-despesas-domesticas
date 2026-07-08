@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react'
 
+// Campo de texto/numero com label sempre associado para manter acessibilidade.
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
 }
